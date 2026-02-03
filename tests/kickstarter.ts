@@ -116,26 +116,6 @@ describe("kickstarter", () => {
       ephemeralProviderInvestor
     );
 
-    // const faucet = anchor.Wallet.local();
-    // // Airdrop SOL to the users
-    // for (const kp of [adminKp, investorKp]) {
-    //   const tx = new Transaction().add(
-    //     SystemProgram.transfer({
-    //       fromPubkey: faucet.publicKey,
-    //       toPubkey: kp.publicKey,
-    //       lamports: 0.1 * LAMPORTS_PER_SOL,
-    //     })
-    //   );
-    //   tx.recentBlockhash = (
-    //     await solanaProvider.connection.getLatestBlockhash()
-    //   ).blockhash;
-    //   tx.feePayer = faucet.publicKey;
-    //   let signedTx = await faucet.signTransaction(tx);
-    //   let rawTx = signedTx.serialize();
-    //   let sig = await solanaProvider.connection.sendRawTransaction(rawTx);
-    //   await solanaProvider.connection.confirmTransaction(sig);
-    // }
-
     let balance = await solanaProvider.connection.getBalance(adminKeypair.publicKey);
     console.log("Balance", balance);
     while (balance === 0) {
@@ -204,28 +184,6 @@ describe("kickstarter", () => {
       console.log(`Waiting for investor ata to be created...`);
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-    // const investorBaseAta = await getOrCreateAssociatedTokenAccount(
-    //  solanaProvider.connection,
-    //   investorKeypair,
-    //   baseMint,
-    //   investor
-    // );
-    // const investorQuoteAta = await getOrCreateAssociatedTokenAccount(
-    //   solanaProvider.connection,
-    //   investorKeypair,
-    //   quoteMint,
-    //   investor
-    // );
-
-    // for (const { ata, name } of [{ ata: investorBaseAta, name: 'investor base' }, { ata: investorQuoteAta, name: 'investor quote' }]) {
-    //   while (
-    //     (await solanaProvider.connection.getAccountInfo(ata.address)) === null
-    //   ) {
-    //     console.log(`Waiting for ${name} ata to be created...`);
-    //     await new Promise((resolve) => setTimeout(resolve, 1000));
-    //   }
-    // }
-
   });
 
   it("Initialize Kickstarter", async () => {
